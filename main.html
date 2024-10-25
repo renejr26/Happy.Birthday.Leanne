@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <style>
+      :root {
+        --dark-color: #000;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-image: radial-gradient(
+            ellipse at top,
+            transparent 0%,
+            var(--dark-color)
+          ),
+          radial-gradient(
+            ellipse at bottom,
+            var(--dark-color),
+            rgba(145, 233, 255, 0.2)
+          ),
+          repeating-linear-gradient(
+            220deg,
+            rgb(0, 0, 0) 0px,
+            rgb(0, 0, 0) 19px,
+            transparent 19px,
+            transparent 22px
+          ),
+          repeating-linear-gradient(
+            189deg,
+            rgb(0, 0, 0) 0px,
+            rgb(0, 0, 0) 19px,
+            transparent 19px,
+            transparent 22px
+          ),
+          repeating-linear-gradient(
+            148deg,
+            rgb(0, 0, 0) 0px,
+            rgb(0, 0, 0) 19px,
+            transparent 19px,
+            transparent 22px
+          ),
+          linear-gradient(90deg, rgb(255, 255, 250), rgb(240, 240, 240));
+        padding: 20px;
+        overflow-y: auto;
+      }
+
+      img {
+        max-width: 100%;
+        height: 30%;
+        margin-bottom: 10px;
+      }
+
+      .typing-text {
+        font-size: 16px;
+        overflow: hidden;
+        max-width: 100%;
+        white-space: normal;
+        word-break: break-word;
+        text-align: center;
+        color: #dfe7e2;
+      }
+
+      @media (max-width: 600px) {
+        .typing-text {
+          font-size: 16px;
+        }
+      }
+
+      audio {
+        display: none;
+      }
+
+      #whatsapp-button {
+        display: none;
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 18px;
+        background-color: #25d366;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      #whatsapp-button:hover {
+        background-color: #20b958;
+      }
+
+      a {
+        border: none;
+        padding: 10px 20px;
+        border-radius: 3em;
+        display: sticky;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        background: linear-gradient(0deg, #a47cf3, #683fea);
+        cursor: pointer;
+        transition: all 450ms ease-in-out;
+        text-decoration: none;
+        color: #dfe7e2;
+      }
+
+      a:hover {
+        background: linear-gradient(0deg, #a47cf3, #683fea);
+        box-shadow: inset 0px 1px 0px 0px rgba(255, 255, 255, 0.4),
+          inset 0px -4px 0px 0px rgba(0, 0, 0, 0.2),
+          0px 0px 0px 4px rgba(255, 255, 255, 0.2), 0px 0px 180px 0px #9917ff;
+        transform: translateY(-2px);
+      }
+      
+    </style>
+  </head>
+  <body>
+    <img src="gg.png" alt="Foto" />
+    <div class="typing-text" id="typing"></div>
+
+    <audio id="background-music" loop>
+      <source src="Backsound.mp3" type="audio/mpeg" />
+      Your browser does not support the audio element.
+    </audio>
+
+    <div style="position: fixed; bottom: 10px; width: 100%; text-align: center">
+      <a
+        href="javascript:void(0)"
+        onclick="document.getElementById('background-music').play()"
+        >Play Audio</a
+      >
+      <a
+        href="javascript:void(0)"
+        onclick="document.getElementById('background-music').pause()"
+        >Pause Audio</a
+      >
+    </div>
+
+    <button id="whatsapp-button" onclick="window.location.href='gg.html'">
+      Click Me
+    </button>
+
+    <script src="script.js"></script>
+    <script>
+      const texts = [
+        "Dear Loveeee,",
+        "Today is 26th day of October, and today is your special day because you were born today. I know you experienced a lot of failures and disappointment, but remember this is a day your birthday. Make your day always happy. Again loveee, happy happy birthday to youuuu!! I hope your day is filled with lots of love and laughter! I hope your wishes come true on your birthday. Nawa'y matupad mo mga pangarap mo sa buhay, habang tinatahak mo ang iyong landas dyan, at sana lalo kapang maging matibay sa mga pagsubok sa buhay. Basta lagi mong tatandaan di ka nag-iisa sa tuwing nahihirapan at feeling mo di mo kaya, wag ka mag-alala at manalangin ka lang at iyon ang tunay na mahalaga sa lahat. Huwag mo nawang mapabayaan ang iyong pagtupad at pagsamba mo dyan, wish ko lang sana maging masaya ka sa araw na ito.",
+        "Sending you a warm birthday wishes and a big hug on your special day! May it be everything you've dreamed. On your birthday, I wish you nothing but happiness, success, and good health in the year ahead. Have a wonderful day! Hope your birthday is as special as you are. Enjoy every moment of this day. Andito lang me palagi at patuloy na nakasuporta sa'yo. Palagi kang nasa isip at puso ko, di man kita nakikita palagi kang kasama sa mga panata ko. Sorry ito lang nakayanan, ang layo mo kase HAHAHAHA. Sorry na ulet at mali-mali grammar ko. I love you today and always and forever.♥️",
+        "Again happy happy birthday tou you, and I love you palagi💞 .Nga pala pa accept sa IG.🥹😭",
+      ];
+
+      let index = 0;
+      const typingElement = document.getElementById("typing");
+      const typingSpeed = 100;
+      const whatsappButton = document.getElementById("whatsapp-button");
+
+      function typeText() {
+        if (index < texts.length) {
+          const paragraph = document.createElement("p");
+          paragraph.textContent = "";
+          typingElement.appendChild(paragraph);
+          let charIndex = 0;
+
+          function typeChar() {
+            if (charIndex < texts[index].length) {
+              paragraph.textContent += texts[index].charAt(charIndex);
+              charIndex++;
+              setTimeout(typeChar, typingSpeed);
+            } else {
+              index++;
+              if (index < texts.length) {
+                setTimeout(typeText, 1000);
+              } else {
+                whatsappButton.style.display = "block";
+              }
+            }
+          }
+
+          typeChar();
+        }
+      }
+
+      typeText();
+    </script>
+  </body>
+</html>
